@@ -26,16 +26,13 @@ public class ConsumeQueueCommand : Command<Settings>
         var consumer = new EventingBasicConsumer(channel);
         consumer.Received += OnMessageReceived;
         channel.BasicConsume(queue: settings.QueueName, autoAck: true, consumer: consumer);
-        
-        AnsiConsole.MarkupLine($"Consuming messages... press [yellow]Q[/] to quit");
-        
+
+        AnsiConsole.MarkupLine("Consuming messages... press [yellow]Q[/] to quit");
+
         var cki = new ConsoleKeyInfo();
-        do 
+        do
         {
-            // true hides the pressed character from the console
             cki = System.Console.ReadKey(true);
-    
-            // Wait for an ESC
         } while (cki.Key != ConsoleKey.Q);
 
         return 0;
@@ -47,8 +44,9 @@ public class ConsumeQueueCommand : Command<Settings>
         var json = new JsonText(Encoding.UTF8.GetString(body));
         AnsiConsole.Write(
             new Panel(json)
-            .Collapse()
-            .RoundedBorder()
-            .BorderColor(Color.Yellow));
+                .Header(DateTime.UtcNow.ToString("u"))
+                .Expand()
+                .RoundedBorder()
+                .BorderColor(Color.Yellow));
     }
 }

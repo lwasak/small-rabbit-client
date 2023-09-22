@@ -6,6 +6,8 @@
         <RootNamespace>RabbitMq.Client.Console</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <TargetName>rbt-client</TargetName>
+        <AssemblyName>rbt-client</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
